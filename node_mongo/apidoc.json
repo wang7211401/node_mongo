@@ -1,0 +1,7 @@
+{
+    "name": "node_mongo",
+    "version": "0.1.0",
+    "description": "接口文档",
+    "title": "Custom apiDoc browser title",
+    "url": "http://127.0.0.1:3000"
+}

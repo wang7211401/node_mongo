@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" />
+        <input type="submit" value="上传">
+    </form>
+    <div>
+        <img src="" alt="" class="img">
+    </div>
+    <script src="https://lib.baomitu.com/jquery/3.4.1/jquery.js"></script>
+
+    <script>
+        $('form').submit(function(e) {
+            e.preventDefault()
+            e.stopPropagation()
+            let file = $("#file")[0].files[0]
+            let formData = new FormData()
+            formData.append('file', file)
+            doUpload(formData)
+        })
+
+        function doUpload(data) {
+            $.ajax({
+                url: 'http://127.0.0.1:3000/file/upload',
+                type: 'POST',
+                cache: false,
+                data,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.err == 0) {
+                        $('.img').attr('src', res.data.img)
+                    } else {
+                        alert(res.msg)
+                    }
+
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
